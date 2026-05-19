@@ -9,6 +9,8 @@ public class Main {
         private static int contadorPaquetes = 0;
         private static Vehiculo[] listaVehiculos = new Vehiculo[100];
         private static int contadorVehiculos = 0;
+        private static PuntoDeDistribucion[] listaPuntos= new PuntoDeDistribucion[100];
+        private static int contadorPuntos=0;
 
     public static void main(String[] args) {
 
@@ -41,7 +43,7 @@ public class Main {
                     submenuVehiculos();
                     break;
                 case 3:
-                    //submenuPuntosDistribucion();
+                    submenuPuntosDistribucion();
                     break;
                 case 4:
                     //submenuRepartidor();
@@ -53,6 +55,110 @@ public class Main {
                     System.out.println("Opción inexistente, por favor ingrese un número válido: ");
             }
         } while (seleccion != 0);
+    }
+
+    private static void submenuPuntosDistribucion() {
+        int seleccion;
+        do {
+            System.out.println("\n--- SUBMENÚ 1: GESTIÓN DE PUNTOS DE DISTRIBUCIÓN ---");
+            System.out.println("1. Registrar punto de distribución");
+            System.out.println("2. Conectar todos los puntos");
+            System.out.println("3. Ver estado de la red");
+            System.out.println("0. Volver al menú principal");
+
+            while (!scn.hasNextInt()) {
+                System.out.print("Por favor, ingrese un número válido: ");
+                scn.next();
+            }
+            seleccion = scn.nextInt();
+            scn.nextLine();
+
+            switch (seleccion) {
+                case 1:
+                    registrarPtoDistribucion();
+                    break;
+                case 2:
+                    conectarNodos();
+                    break;
+                case 3:
+                    verEstadoRed();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Opción inexistente, por favor ingrese un número válido: ");
+            }
+        } while (seleccion != 0);
+    }
+
+    private static void verEstadoRed() {
+        System.out.println("\n--- ESTADO DE LA RED ---");
+        if (contadorPuntos == 0) {
+            System.out.println("La red está vacía.");
+            return;
+        }
+
+        for (int i = 0; i < contadorPuntos; i++) {
+            System.out.println("Punto: " + listaPuntos[i].getNombreNodo() + " | Estado: " + (listaPuntos[i].estaConectado() ? "conectado" : "desconectado"));
+        }
+
+    }
+
+    private static void conectarNodos() {
+        System.out.println("\n--- Iniciando protocolo de conexión de red ---");
+        if (contadorPuntos == 0) {
+            System.out.println("No hay puntos para conectar");
+            return;
+        }
+
+        Conectable[] red = listaPuntos;
+
+        for (int i = 0; i < contadorPuntos; i++) {
+            if (red[i] != null) {
+                boolean exito = red[i].conectarALaRed();
+                if (exito) {
+                    System.out.println(listaPuntos[i].getNombreNodo() + ", conectado con éxito" );
+                } else {
+                    System.out.println(listaPuntos[i].getNombreNodo() + ", no pudo ser conectado");
+                }
+            }
+        }
+    }
+
+    private static void registrarPtoDistribucion() {
+
+        System.out.println("\n--- Registrar Nuevo Punto de Distribución---");
+
+        if (contadorPuntos >= listaPuntos.length) {
+            System.out.println("Error: no es posible agregar un nuevo punto de distribución, ya que el límite de carga fue alcanzado.");
+            return;
+        }
+
+        PuntoDeDistribucion nuevoPunto = new PuntoDeDistribucion();
+
+        System.out.print("Ingrese el nombre del punto de distribución: ");
+        nuevoPunto.setNombre(scn.nextLine());
+
+        System.out.print("Ingrese la coordenada en X: ");
+        while (!scn.hasNextDouble()) {
+            System.out.print("Peso inválido. Ingrese un número: ");
+            scn.next();
+        }
+        nuevoPunto.setCoordenadaX(scn.nextDouble());
+        scn.nextLine();
+
+        System.out.print("Ingrese la coordenada en Y: ");
+        while (!scn.hasNextDouble()) {
+            System.out.print("Peso inválido. Ingrese un número: ");
+            scn.next();
+        }
+        nuevoPunto.setCoordenadaY(scn.nextDouble());
+        scn.nextLine();
+
+        listaPuntos[contadorPuntos] = nuevoPunto;
+        contadorPuntos++;
+        System.out.println("Punto de Distribución registrado exitosamente");
+
     }
 
     public static void submenuPaquetes() {

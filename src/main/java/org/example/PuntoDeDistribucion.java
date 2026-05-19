@@ -16,6 +16,9 @@ public class PuntoDeDistribucion implements Conectable{
         this.visitado = false;
     }
 
+    public PuntoDeDistribucion() {
+    }
+
     public double getCoordenadaX() {
         return coordenadaX;
     }
@@ -30,6 +33,10 @@ public class PuntoDeDistribucion implements Conectable{
 
     public void setCoordenadaY(double coordenadaY) {
         this.coordenadaY = coordenadaY;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
@@ -59,7 +66,10 @@ public class PuntoDeDistribucion implements Conectable{
 
     @Override
     public boolean conectarALaRed() {
-        return visitado;
+        if(visitado==true){
+            conectado=true;
+        }
+        return conectado;
     }
 
     @Override
