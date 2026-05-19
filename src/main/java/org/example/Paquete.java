@@ -17,7 +17,11 @@ public class Paquete implements Comparable<Paquete>, Cloneable{
     }
 
     public void setId(String id) {
-        this.id = id;
+        if (id == null) {
+            this.id = null;
+        } else {
+            this.id = id.toLowerCase();
+        }
     }
 
     public void setDescripcion(String descripcion) {
@@ -77,11 +81,10 @@ public class Paquete implements Comparable<Paquete>, Cloneable{
 
     @Override
     public String toString() {
-        return "Paquete n° {" +
-                "id='" + id + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", peso=" + peso + "Kg" + '\'' +
-                ", urgente=" + urgente + '\'' +
-                '}';
+        return "Paquete n° " + (id == null ? "" : id) + " {" +
+            "descripcion='" + descripcion + '\'' +
+            ", peso=" + peso + "Kg" +
+            ", urgente=" + urgente +
+            '}';
     }
 }

@@ -15,6 +15,11 @@ public class Moto extends Vehiculo{
     }
 
     @Override
+    public double getConsumoPorKm() {
+        return 0.5;
+    }
+
+    @Override
     public String descripcionTipo() {
         return "moto";
     }

@@ -59,6 +59,36 @@ public class Repartidor {
         this.vehiculoActual=null;
     }
 
+    public Vehiculo getVehiculoActual(){
+        return this.vehiculoActual;
+    }
+
+    public PuntoDeDistribucion getUbicacionActual(){
+        return this.ubicacionActual;
+    }
+
+    public boolean puedeViajarA(PuntoDeDistribucion destino){
+        if(destino == null){
+            return false;
+        }
+        double distancia = this.ubicacionActual.distanciaA(destino);
+        if(this.vehiculoActual!=null){
+            return this.vehiculoActual.getBateriaActual() >= distancia * this.vehiculoActual.getConsumoPorKm();
+        }
+        return this.resistencia >= distancia * 0.8;
+    }
+
+    public double energiaNecesariaParaViajar(PuntoDeDistribucion destino){
+        if(destino == null){
+            return 0.0;
+        }
+        double distancia = this.ubicacionActual.distanciaA(destino);
+        if(this.vehiculoActual!=null){
+            return distancia * this.vehiculoActual.getConsumoPorKm();
+        }
+        return distancia * 0.8;
+    }
+
     @Override
     public String toString() {
         return "Repartidor{" +
