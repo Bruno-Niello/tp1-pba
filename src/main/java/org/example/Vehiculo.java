@@ -23,6 +23,10 @@ public abstract class  Vehiculo {
         }
     }
 
+    public double getBateriaActual() {
+        return bateriaActual;
+    }
+
     public double getCapacidadCargaKg() {
         return capacidadCargaKg;
     }
@@ -36,6 +40,8 @@ public abstract class  Vehiculo {
     }
 
     public abstract void desplazarse(double distanciaKm); //consume batería según la distancia.
+
+    public abstract double getConsumoPorKm();
 
     public abstract String descripcionTipo();
 

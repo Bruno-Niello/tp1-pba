@@ -22,8 +22,13 @@ public class Camion extends Vehiculo {
     }
 
     @Override
+    public double getConsumoPorKm() {
+        return tieneRemolque ? 2.5 : 1.8;
+    }
+
+    @Override
     public String descripcionTipo() {
-        return "moto";
+        return "camion";
     }
 
     @Override

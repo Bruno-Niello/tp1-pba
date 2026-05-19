@@ -32,6 +32,11 @@ public class PuntoDeDistribucion implements Conectable{
         this.coordenadaY = coordenadaY;
     }
 
+    public void marcarVisitado() {
+        this.visitado = true;
+        this.conectado = true;
+    }
+
     /**
      * Calcula la distancia euclidiana entre este punto y otro punto de distribución.
      * Usa la fórmula: d = sqrt((x2 - x1)^2 + (y2 - y1)^2)
