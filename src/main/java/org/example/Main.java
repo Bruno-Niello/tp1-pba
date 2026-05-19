@@ -43,7 +43,7 @@ public class Main {
                     submenuVehiculos();
                     break;
                 case 3:
-                    //submenuPuntosDistribucion();
+                    submenuPuntosDistribucion();
                     break;
                 case 4:
                     //submenuRepartidor();
@@ -99,7 +99,7 @@ public class Main {
         }
 
         for (int i = 0; i < contadorPuntos; i++) {
-            System.out.println("Punto: " + listaPuntos[i].getNombre() + " | Estado: " + (listaPuntos[i].estaConectado() ? "conectado" : "desconectado"));
+            System.out.println("Punto: " + listaPuntos[i].getNombreNodo() + " | Estado: " + (listaPuntos[i].estaConectado() ? "conectado" : "desconectado"));
         }
 
     }
@@ -117,9 +117,9 @@ public class Main {
             if (red[i] != null) {
                 boolean exito = red[i].conectarALaRed();
                 if (exito) {
-                    System.out.println(listaPuntos[i].getNombre() + ", conectado con éxito" );
+                    System.out.println(listaPuntos[i].getNombreNodo() + ", conectado con éxito" );
                 } else {
-                    System.out.println(listaPuntos[i].getNombre() + ", no pudo ser conectado");
+                    System.out.println(listaPuntos[i].getNombreNodo() + ", no pudo ser conectado");
                 }
             }
         }
